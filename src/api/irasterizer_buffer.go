@@ -10,11 +10,10 @@ type IRasterBuffer interface {
 	EnableAlphaBlending(enable bool)
 	Pixels() *image.RGBA
 	Clear()
-	SetPixel(x, y int, z float32) int
+	SetPixel(x, y int) int
 	SetPixelColor(c color.RGBA)
 
-	DrawLine(xP, yP, xQ, yQ int, zP, zQ float32)
-	DrawLineAmmeraal(xP, yP, xQ, yQ int, zP, zQ float32)
+	DrawLineAmmeraal(xP, yP, xQ, yQ int)
 
 	FillTriangleAmmeraal(leftEdge, rightEdge IEdge, skipBottom, skipRight bool)
 }
