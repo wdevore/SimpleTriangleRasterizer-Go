@@ -1,4 +1,4 @@
-package raster
+package geometry
 
 import (
 	"SimpleTriangleRasterizer/src/api"
@@ -19,7 +19,7 @@ type Triangle struct {
 }
 
 // NewTriRasterizer creates a new rasterizer
-func NewTriRasterizer() api.IRasterTriangle {
+func NewTriangle() api.ITriangle {
 	o := new(Triangle)
 	o.leftEdge = NewEdge()
 	o.rightEdge = NewEdge()
@@ -77,8 +77,8 @@ func (t *Triangle) Fill(raster api.IRasterBuffer) {
 
 	if t.y2 == t.y3 {
 		// Case for flat-bottom triangle
-		t.rightEdge.Set(t.x1, t.y1, t.x2, t.y2, t.z1, t.z2)
 		t.leftEdge.Set(t.x1, t.y1, t.x3, t.y3, t.z1, t.z3)
+		t.rightEdge.Set(t.x1, t.y1, t.x2, t.y2, t.z1, t.z2)
 		raster.FillTriangleAmmeraal(t.leftEdge, t.rightEdge, true, false)
 		// raster.DrawLine(t.x2, t.y2, t.x3, t.y3, 1.0, 1.0) // Bottom <-- overdraw
 	} else if t.y1 == t.y2 {
@@ -95,8 +95,9 @@ func (t *Triangle) Fill(raster api.IRasterBuffer) {
 		// --------------------------
 		// Top triangle flat-bottom
 		// y2 will always be in the "middle" which means it is always at the bottom of the flat-bottom
-		t.rightEdge.Set(t.x1, t.y1, t.x2, t.y2, 1.0, 1.0)
+		// Set the edges for scanning left to right
 		t.leftEdge.Set(t.x1, t.y1, x, t.y2, 1.0, 1.0)
+		t.rightEdge.Set(t.x1, t.y1, t.x2, t.y2, 1.0, 1.0)
 
 		raster.SetPixelColor(color.RGBA{R: 255, G: 255, B: 255, A: 255})
 		raster.FillTriangleAmmeraal(t.leftEdge, t.rightEdge, true, false)

@@ -10,7 +10,12 @@ This rasterizer supports Translucency and Overdraw. It is based on the Top-Left 
 # Code
 Even in Go there is a large chunk of code needed just to provide an output for the rasterization. A majority of the code is simply just to construct and manage the window, **SDL** and render loop.
 
-The main rasterizing code is contains within ...
+The main rasterizing code is contained in the Green boxes:
+- RasterBuffer  <-- Pixel and line draw
+- Triangle <-- sets up edges
+- Edge
+
+![Code Diagram](SimpleTriangleRasterizer.png)
 
 # References
 - [sunshine2k](http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html) specifics for scanline rasterization. It also covers the Barycentric Algorithm as well.

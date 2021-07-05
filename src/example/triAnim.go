@@ -2,11 +2,11 @@ package main
 
 import (
 	"SimpleTriangleRasterizer/src/api"
-	"SimpleTriangleRasterizer/src/raster"
+	"SimpleTriangleRasterizer/src/geometry"
 )
 
 type triStruct struct {
-	tri api.IRasterTriangle
+	tri api.ITriangle
 
 	// Triangle's position
 	x, y int
@@ -29,7 +29,7 @@ type triStruct struct {
 }
 
 var tri = triStruct{
-	tri:  raster.NewTriRasterizer(),
+	tri:  geometry.NewTriangle(),
 	x:    250,
 	y:    200,
 	x1:   0,

@@ -14,6 +14,5 @@ type IRasterBuffer interface {
 	SetPixelColor(c color.RGBA)
 
 	DrawLineAmmeraal(xP, yP, xQ, yQ int)
-
 	FillTriangleAmmeraal(leftEdge, rightEdge IEdge, skipBottom, skipRight bool)
 }
