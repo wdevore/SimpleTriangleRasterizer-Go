@@ -3,6 +3,12 @@ A simple Bresenham triangle rasterizer that references on Ammeraal's graphics bo
 
 ![Triangle Rasterizer](TriangleRasterizer.png)
 
+# 2024-03-01
+Something is broken with ttf fonts and SDL2. So I now have to statically compile it:
+```sh
+CGO_ENABLED=1 CC=gcc GOOS=linux GOARCH=amd64 go build -tags static -ldflags "-s -w"
+```
+
 This rasterizer renders a *single* triangle. It does not support shared edges based on Polygons. However, adding that feature is simply a matter of adding a Polygon class that tracks inside and outside edges. If you are considering using this for FPGAs then you will need to think about graphic pipelines and perhaps consider the Barycentric algorithm as well (see reference #1).
 
 This rasterizer supports Translucency and Overdraw. It is based on the Top-Left algorithm. However, because this code only renders independent triangles it does draw the *right* side edges, but it doesn't draw the **Top**'s bottom edge which saves on overdraw at the X intercept.
